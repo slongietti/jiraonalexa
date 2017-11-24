@@ -57,13 +57,31 @@
       },
       {
         "name": "AssignIssueIntent",
-        "samples": [],
-        "slots": []
+        "samples": [
+          "Assign {IssueKey} to {Username}"
+        ],
+        "slots": [
+          {
+            "name": "IssueKey",
+            "type": null
+          },
+          {
+            "name": "Username",
+            "type": null
+          }
+        ]
       },
       {
         "name": "BecomeWatcherIntent",
-        "samples": [],
-        "slots": []
+        "samples": [
+          "Add {IssueKey} to watch list"
+        ],
+        "slots": [
+          {
+            "name": "IssueKey",
+            "type": null
+          }
+        ]
       },
       {
         "name": "CreateIssueIntent",
@@ -165,13 +183,27 @@
       },
       {
         "name": "GetPreviousReleaseIntent",
-        "samples": [],
-        "slots": []
+        "samples": [
+          "What was the last release to {ProjectKey}"
+        ],
+        "slots": [
+          {
+            "name": "ProjectKey",
+            "type": null
+          }
+        ]
       },
       {
         "name": "GetReleaseCompletePercentIntent",
-        "samples": [],
-        "slots": []
+        "samples": [
+          "How far along is {ReleaseNumber}"
+        ],
+        "slots": [
+          {
+            "name": "ReleaseNumber",
+            "type": null
+          }
+        ]
       },
       {
         "name": "TransitionIssueIntent",
@@ -209,6 +241,15 @@
         {
           "type": "PlainText",
           "value": "What is the issue type?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-GetFutureReleaseIntent.IntentSlot-ProjectKey",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What Project?"
         }
       ]
     }
@@ -257,7 +298,9 @@
             "type": null,
             "elicitationRequired": true,
             "confirmationRequired": false,
-            "prompts": {}
+            "prompts": {
+              "elicitation": "Elicit.Intent-GetFutureReleaseIntent.IntentSlot-ProjectKey"
+            }
           }
         ]
       }
