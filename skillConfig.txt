@@ -1,0 +1,266 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "IssueType",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "Story",
+              "synonyms": [
+                "User Story"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "Bug",
+              "synonyms": [
+                "Defect"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "Task",
+              "synonyms": [
+                "Line Item"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.PauseIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.ResumeIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "AssignIssueIntent",
+        "samples": [],
+        "slots": []
+      },
+      {
+        "name": "BecomeWatcherIntent",
+        "samples": [],
+        "slots": []
+      },
+      {
+        "name": "CreateIssueIntent",
+        "samples": [
+          "Create new issue for {ProjectKey}",
+          "Create new {IssueType}",
+          "Create new {IssueType} for {ProjectKey}",
+          "Create {IssueType}",
+          "Create a {ProjectKey} {IssueType}",
+          "Create a new {ProjectKey} {IssueType}"
+        ],
+        "slots": [
+          {
+            "name": "ProjectKey",
+            "type": null,
+            "samples": [
+              "The Project is {ProjectKey}",
+              "{ProjectKey}",
+              "it is {ProjectKey}"
+            ]
+          },
+          {
+            "name": "IssueType",
+            "type": "IssueType",
+            "samples": [
+              "The issue type is {IssueType}",
+              "{IssueType}",
+              "It is a {IssueType}",
+              "It's a {IssueType}"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GetAssigneeIntent",
+        "samples": [],
+        "slots": []
+      },
+      {
+        "name": "GetFutureReleaseIntent",
+        "samples": [
+          "When will {ReleaseNumber} be complete",
+          "When will {ReleaseNumber} for {ProjectKey} be complete",
+          "When will {ReleaseNumber} be sent to {ProjectKey}",
+          "When will {ProjectKey} get the next release",
+          "When is the next release for {ProjectKey}",
+          "next release for {ProjectKey}",
+          "What is the next release for {ProjectKey}"
+        ],
+        "slots": [
+          {
+            "name": "ReleaseNumber",
+            "type": null
+          },
+          {
+            "name": "ProjectKey",
+            "type": null,
+            "samples": [
+              "{ProjectKey}",
+              "The project is {ProjectKey}",
+              "for {ProjectKey}"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GetIssueIntent",
+        "samples": [
+          "Search for Issue {IssueKey}",
+          "Search for {IssueKey}",
+          "Find {IssueKey}",
+          "{IssueKey}",
+          "Bring up {IssueKey}",
+          "Tell me about {IssueKey}",
+          "What is the status of {IssueKey}",
+          "Status of {IssueKey}",
+          "Where is {IssueKey}",
+          "Issue with description like {IssueDescription}",
+          "description like {IssueDescription}",
+          "Item {IssueKey}",
+          "Bug {IssueKey}",
+          "Story{IssueKey}",
+          "User Story {IssueKey}",
+          "item that goes {IssueDescription}",
+          "item that says {IssueDescription}",
+          "Item about {IssueDescription}",
+          "Item containing {IssueDescription}"
+        ],
+        "slots": [
+          {
+            "name": "IssueKey",
+            "type": null
+          },
+          {
+            "name": "IssueDescription",
+            "type": null
+          }
+        ]
+      },
+      {
+        "name": "GetPreviousReleaseIntent",
+        "samples": [],
+        "slots": []
+      },
+      {
+        "name": "GetReleaseCompletePercentIntent",
+        "samples": [],
+        "slots": []
+      },
+      {
+        "name": "TransitionIssueIntent",
+        "samples": [
+          "Move {IssueKey} to {TransitionTarget}",
+          "Put {IssueKey} in {TransitionTarget}"
+        ],
+        "slots": [
+          {
+            "name": "IssueKey",
+            "type": null
+          },
+          {
+            "name": "TransitionTarget",
+            "type": null
+          }
+        ]
+      }
+    ],
+    "invocationName": "jira"
+  },
+  "prompts": [
+    {
+      "id": "Elicit.Intent-CreateIssueIntent.IntentSlot-ProjectKey",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What Project?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-CreateIssueIntent.IntentSlot-IssueType",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What is the issue type?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "intents": [
+      {
+        "name": "CreateIssueIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "ProjectKey",
+            "type": null,
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-CreateIssueIntent.IntentSlot-ProjectKey"
+            }
+          },
+          {
+            "name": "IssueType",
+            "type": "IssueType",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-CreateIssueIntent.IntentSlot-IssueType"
+            }
+          }
+        ]
+      },
+      {
+        "name": "GetFutureReleaseIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "ReleaseNumber",
+            "type": null,
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          },
+          {
+            "name": "ProjectKey",
+            "type": null,
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {}
+          }
+        ]
+      }
+    ]
+  }
+}
